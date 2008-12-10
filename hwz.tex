@@ -1,0 +1,111 @@
+\documentclass[11pt,a4paper]{globis-book}
+
+\usepackage{graphicx}
+\usepackage[helvetica]{quotchap}
+\usepackage{times}
+%\usepackage{ethfont}
+\usepackage[british]{babel}
+\usepackage{longtable}
+\usepackage{fancyhdr}
+\usepackage{shadethm}
+\usepackage{url}
+\usepackage{makeidx}
+\usepackage[a4paper,portrait,twoside,inner=3.25cm,outer=3.5cm,top=3.5cm,bottom=4.0cm]{geometry}
+\usepackage{hyperref}
+\usepackage{globis}
+
+\renewcommand{\sectfont}{\sffamily\bfseries\Huge}
+
+\setlength{\shadedtextwidth}{\textwidth}
+\setlength{\shadeleftshift}{3mm}
+\setlength{\shaderightshift}{3mm}
+\addtolength{\shadedtextwidth}{-\shadeleftshift}
+\addtolength{\shadedtextwidth}{-\shaderightshift}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\sloppy
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\sffamily\bfseries\small\thepage}
+\fancyhead[LO]{\sffamily\bfseries\small\leftmark}
+\fancyhead[RE]{\sffamily\bfseries\small\rightmark}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+   \fancyhf{}
+   \fancyfoot[C]{\sffamily\bfseries\small\thepage}
+   \renewcommand{\headrulewidth}{0pt}
+   \renewcommand{\footrulewidth}{0pt}
+}
+
+\hypersetup{
+    pdftitle = Globis Book Example,
+    pdfauthor = Corsin Decurtins,
+    pdfsubject = Example for the Globis Book LaTeX style,
+    pdfkeywords = example,
+    colorlinks = true,
+    linkcolor = black,%red,
+    anchorcolor = black,%red,
+    citecolor = black,%blue,
+    filecolor = black,%red,
+    pagecolor = black,%red,
+    urlcolor = black,%red,
+    plainpages = false,
+    bookmarksnumbered = true
+} 
+
+\raggedbottom
+
+\title{Globis Book Style}
+\category{Example} % Something like Semester Thesis, Diploma Thesis or White Paper
+\author{Corsin Decurtins}
+\email{$<$corsin.decurtins@inf.ethz.ch$>$}
+\professor{Prof. Dr. Moira C. Norrie}
+%\assistant{Corsin Decurtins}
+\group{Global Information Systems Group}
+\institute{Institute of Information Systems}
+\department{Department of Computer Science}
+\school{}
+\version{}
+\date{\today}
+\copyrightyear{2005}
+
+\makeindex
+
+\begin{document}
+
+\frontmatter
+\maketitlepage
+\cleardoublepage
+\pdfbookmark{Contents}{toc}
+
+\chapter*{Abstract}
+
+Here comes the abstract.
+
+\tableofcontents
+
+\mainmatter
+
+% here comes the content
+
+\part{First}
+\chapter{Foo}
+\section{Bar}
+\subsection{Quux}
+Lorem ipsum dolor
+
+\appendix
+
+\listoffigures
+\listoftables
+
+\chapter*{Acknowledgements}
+
+\newpage
+\thispagestyle{empty}
+
+\end{document} 
