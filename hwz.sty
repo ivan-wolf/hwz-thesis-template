@@ -8,6 +8,8 @@
 \RequirePackage{relsize}
 \RequirePackage{alltt}
 \RequirePackage{shadethm}
+\RequirePackage{listings}
+\RequirePackage{xcolor} 
 
 \newif\ifpdf 
 \ifx\pdfoutput\undefined 
@@ -154,6 +156,18 @@
 \newcommand{\codebox}[1]{%
    \outline{%
       \code{#1}
+   }
+}
+
+\newcommand{\javacode}[1]{
+	\begin{lstlisting}[language=Java]
+		#1
+	\end{lstlisting}
+}
+
+\newcommand{\javabox}[1]{%
+   \outline{%
+      \javacode{#1}
    }
 }
 
@@ -372,6 +386,48 @@
 
 % Intro Environment
 \newenvironment{intro}{\sffamily}{\vspace*{2ex minus 1.5ex}}
+
+% Code
+\definecolor{hellgelb}{rgb}{1,1,0.8}
+\definecolor{colKeys}{rgb}{0,0,1}
+\definecolor{colIdentifier}{rgb}{0,0,0}
+\definecolor{colComments}{rgb}{1,0,0}
+\definecolor{colString}{rgb}{0,0.5,0}
+
+\lstset{%
+    float=hbp,%
+    basicstyle=\ttfamily\small, %
+    identifierstyle=\color{colIdentifier}, %
+    keywordstyle=\color{colKeys}, %
+    stringstyle=\color{colString}, %
+    commentstyle=\color{colComments}, %
+    columns=flexible, %
+    tabsize=2, %
+    frame=single, %
+    extendedchars=true, %
+    showspaces=false, %
+    showstringspaces=false, %
+    numbers=left, %
+    numberstyle=\tiny, %
+    breaklines=true, %
+    backgroundcolor=\color{hellgelb}, %
+    breakautoindent=true, %
+    captionpos=b%
+}
+
+%\usepackage{float}
+
+%\newenvironment{code}[2]
+%{\begin{figure}[htb] \begin{lstlisting}[language=#1,label=listing:#2]}
+%{\end{lstlisting} \caption{#2} \end{figure}}
+
+\newcommand{\javafigure}[3]{%
+   \begin{figure}[htb]
+      \javabox{#1}
+      \caption{#2}
+      \label{#3}
+   \end{figure}
+}
 
 \endinput
 
