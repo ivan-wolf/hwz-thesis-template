@@ -1,4 +1,3 @@
-chapters/original/*
 *.aux
 *.bbl
 *.blg
@@ -16,4 +15,4 @@ chapters/original/*
 *.bak
 *.glo
 *.gls
-riaa.ist
+*.ist

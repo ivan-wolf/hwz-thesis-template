@@ -1,7 +1,7 @@
-%% This file is `globis.sty'
+%% This file is `hwz.sty'
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesPackage{globis}[2000/11/06 0.1 Globis Style]
+\ProvidesPackage{hwz}[2008/12/10 0.1 HWZ Style]
 
 \RequirePackage{graphicx}
 \RequirePackage{textcomp}
@@ -19,27 +19,25 @@
 \logotrue
 
 % Global Definitions
+\def\subtitle#1{\gdef\@subtitle{#1}}
 \def\logo#1{\gdef\@logo{#1}}
 \def\email#1{\gdef\@email{#1}}
 \def\professor#1{\gdef\@professor{#1}}
 \def\assistant#1{\gdef\@assistant{#1}}
 \def\school#1{\gdef\@school{#1}}
 \def\department#1{\gdef\@department{#1}}
-\def\institute#1{\gdef\@institute{#1}}
-\def\group#1{\gdef\@group{#1}}
 \def\version#1{\gdef\@version{#1}}
 \def\category#1{\gdef\@category{#1}}
 \def\copyrightyear#1{\gdef\@copyrightyear{#1}}
-\gdef\@logo{globis}
+\gdef\@subtitle{}
+\gdef\@logo{graphics/hwz}
 \gdef\@email{}
-\gdef\@professor{Prof. Moira C. Norrie}
-\gdef\@assistant{Michael Grossniklaus}
-\gdef\@school{Swiss Federal Institute of Technology}
-\gdef\@department{Department of Computer Science}
-\gdef\@institute{Institute of Information Systems}
-\gdef\@group{Global Information Systems}
+\gdef\@professor{Dr. Antoine Trad}
+\gdef\@assistant{}
+\gdef\@school{HWZ Hochschule für Wirtschaft}
+\gdef\@department{Zürcher Fachhochschule}
 \gdef\@version{}
-\gdef\@category{Student Work}
+\gdef\@category{Bachelor Thesis}
 \gdef\@copyrightyear{}
 
 % Subscript
@@ -49,9 +47,7 @@
   {\m@th\ensuremath{_{\mbox{\fontsize\sf@size\z@#1}}}}}
 
 % Logos
-\newcommand{\ETHlogo}[1][scale=1.0]{\includegraphics[#1]{eth}}
-\newcommand{\GlobISlogo}[1][scale=1.0]{\includegraphics[#1]{globis}}
-\newcommand{\RightLogo}[1][scale=1.0]{\includegraphics[#1]{\@logo}}
+\newcommand{\HWZlogo}[1][scale=1.0]{\includegraphics[#1]{graphics/hwz}}
 
 % Exercise Format
 \newcounter{series}
@@ -219,11 +215,11 @@
 \gdef\@seriestitle{}
 
 
-\typeout{Pagestyle 'globis'}
+\typeout{Pagestyle 'hwz'}
 \def\es{} % eat space for nice formatting
 \def\logosize{\@setsize\normalsize{12pt}\xpt\@xpt} % always make font letters same size
                                                    
-\def\ps@globis{\es
+\def\ps@hwz{\es
 
   \addtolength{\textheight}{\headheight} % change the page parms around
   \setlength{\headheight}{15.6mm}
@@ -231,31 +227,20 @@
   \setlength{\topmargin}{-8.5mm}
   \setlength{\headsep}{10mm}
 
-  \newsavebox{\ETHlogoBox}
-  \sbox{\ETHlogoBox}{\es              % Put the ETH logo in a box
+  \newsavebox{\HWZlogoBox}
+  \sbox{\HWZlogoBox}{\es              % Put the HWZ logo in a box
     \setlength{\unitlength}{0.01mm}\es
-    \ETHlogo[height=13mm]
-  }
-  \newsavebox{\RightLogoBox}
-  \sbox{\RightLogoBox}{\es           % Put the GlobIS logo in a box
-    \setlength{\unitlength}{0.01mm}\es
-    \RightLogo[height=13mm]
+    \HWZlogo[height=13mm]
   }
   \def\@oddhead{\es
     \unitlength=\textwidth\es
     \unitlength=1mm \noindent \hfuzz=250pt
     \begin{picture}(33,20)
-       \put(0,0){\usebox{\ETHlogoBox}}
-       \put(0,-2.7){\sffamily\fontsize{7}{12}\bfseries \@institute}
+       \put(0,0){\usebox{\HWZlogoBox}}
+       \put(0,-2.7){\sffamily\fontsize{7}{12}\bfseries \@school}
        \put(0,-6.1){\sffamily\fontsize{7}{12}\bfseries \@professor}
        \put(0,-9.5){\parbox[t]{0.5\textwidth}{\sffamily\fontsize{7}{10}\bfseries \@creators}}
     \end{picture}
-    \hfill
-    \iflogo
-      \begin{picture}(35,13)
-         \put(0,0){\usebox{\RightLogoBox}}
-      \end{picture}\es
-    \fi
   } 
   \def\@oddfoot{}            % Empty foot
   \let\@evenhead\@oddhead    % Same for evenhead/foot
@@ -282,7 +267,7 @@
 % Backshlash everywhere
 \newcommand{\bsl}{\char`\\}
 
-% GlobIS Titlepage
+% HWZ Titlepage
 
 \newcommand{\maketitlepage}{
    \begin{titlepage}%
@@ -298,7 +283,11 @@
       \noindent\hspace*{\centeroffset}%
       \makebox[0pt][l]{%
          \begin{minipage}{\textwidth}%
-            \flushright {\Huge\bfseries \@title}
+            \flushright {%
+            	{\Huge\bfseries \@title}\par
+            	\vspace{0.5cm}
+            	{\LARGE\bfseries \@subtitle}
+            }%
             \noindent\rule[-1ex]{\textwidth}{2pt}\par
             \vspace{0.9cm}
             \hfill\emph{\huge \@category}
@@ -317,28 +306,29 @@
             \vspace{0.1cm}          
             \@assistant\par
             \vspace{1cm}
-            \@group\par
-            \@institute\par
-            \@department\par
-            \@school\par}
+            \@school\par
+            \@department\par}
             \vspace{1cm}
             {\normalsize \@version\par
             \@date}
          }%
          \end{minipage}
       }
-      \vspace{1cm}
-      \begin{figure}[b]%
-         \begin{minipage}[t]{6cm}%
-            \flushleft
-            \includegraphics[height=1cm]{eth}
-         \end{minipage}
-         \hfill
-         \begin{minipage}[t]{6cm}%
-            \flushright
-            \includegraphics[height=1cm]{globis}
-         \end{minipage}
-      \end{figure}
+      \vspace{4cm}
+      %\begin{figure}[b]%
+      %   \begin{minipage}[t]{6cm}%
+      %      \flushright
+      %      \includegraphics[height=1cm]{graphics/hwz}
+      %   \end{minipage}
+      %   \hfill
+      %\end{figure}      
+      
+			\begin{figure}[b]%
+				\centering
+					\includegraphics[height=1cm]{graphics/hwz}
+			\end{figure}
+
+      
       \addtolength{\textwidth}{\centeroffset} 
       %\vspace{\stretch{1}}
       
@@ -347,10 +337,41 @@
       \thispagestyle{empty} 
       \vspace*{\stretch{1}}
       \begin{small}%
-         \noindent Copyright \copyright{} \@copyrightyear \ \@group.
+         \noindent Copyright \copyright{} \@copyrightyear \ \@school.
       \end{small}
       
    \end{titlepage}
 }
 
+% Some commands for helping with INDEX creation
+%
+% Index entry for a command (\cih for hidden command index
+\newcommand{\eei}[1]{%
+\index{extension!\texttt{#1}}\texttt{#1}}
+% probably add handling of period like handling of \ in \ci 
+\newcommand{\fni}[1]{%
+\index{font!#1@\texttt{\bs#1}}%
+\index{#1@\texttt{\hspace*{-1.2ex}\bs #1}}\texttt{\bs #1}}
+\newcommand{\cih}[1]{%
+\index{commands!#1@\texttt{\bs#1}}%
+\index{#1@\texttt{\hspace*{-1.2ex}\bs #1}}}
+\newcommand{\ci}[1]{\cih{#1}\texttt{\bs #1}}
+%Package
+\newcommand{\paih}[1]{%
+\index{packages!#1@\textsf{#1}}%
+\index{#1@\textsf{#1}}}
+\newcommand{\pai}[1]{%
+\paih{#1}\textsf{#1}}
+% Index entry for an environment
+\newcommand{\ei}[1]{%
+\index{environments!\texttt{#1}}%
+\index{#1@\texttt{#1}}%
+\texttt{#1}}
+% Indexentry for a word (Word inserted into the text)
+\newcommand{\wi}[1]{\index{#1}#1}
+
+% Intro Environment
+\newenvironment{intro}{\sffamily}{\vspace*{2ex minus 1.5ex}}
+
 \endinput
+

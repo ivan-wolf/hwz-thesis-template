@@ -1,10 +1,12 @@
-\documentclass[11pt,a4paper]{globis-book}
+\documentclass[11pt,a4paper]{hwz-thesis}
 
 \usepackage{graphicx}
 \usepackage[helvetica]{quotchap}
 \usepackage{times}
-%\usepackage{ethfont}
-\usepackage[british]{babel}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[latin1]{inputenc}
+\RequirePackage{lmodern}
+\usepackage[german,ngerman]{babel}
 \usepackage{longtable}
 \usepackage{fancyhdr}
 \usepackage{shadethm}
@@ -12,7 +14,10 @@
 \usepackage{makeidx}
 \usepackage[a4paper,portrait,twoside,inner=3.25cm,outer=3.5cm,top=3.5cm,bottom=4.0cm]{geometry}
 \usepackage{hyperref}
-\usepackage{globis}
+\usepackage{hwz}
+\usepackage[comma]{natbib}
+\usepackage{blindtext}
+\usepackage{glossaries}
 
 \renewcommand{\sectfont}{\sffamily\bfseries\Huge}
 
@@ -42,70 +47,83 @@
 }
 
 \hypersetup{
-    pdftitle = Globis Book Example,
-    pdfauthor = Corsin Decurtins,
-    pdfsubject = Example for the Globis Book LaTeX style,
+    pdftitle = HWZ Thesis Example,
+    pdfauthor = Ivan Wolf,
+    pdfsubject = Example for the HWZ Thesis LaTeX style,
     pdfkeywords = example,
     colorlinks = true,
-    linkcolor = black,%red,
-    anchorcolor = black,%red,
+    linkcolor = blue,%red,
+    anchorcolor = blue,%red,
     citecolor = black,%blue,
     filecolor = black,%red,
-    pagecolor = black,%red,
-    urlcolor = black,%red,
+    urlcolor = blue,%red,
     plainpages = false,
     bookmarksnumbered = true
 } 
 
-\raggedbottom
-
-\title{Globis Book Style}
-\category{Example} % Something like Semester Thesis, Diploma Thesis or White Paper
-\author{Corsin Decurtins}
-\email{$<$corsin.decurtins@inf.ethz.ch$>$}
-\professor{Prof. Dr. Moira C. Norrie}
-%\assistant{Corsin Decurtins}
-\group{Global Information Systems Group}
-\institute{Institute of Information Systems}
-\department{Department of Computer Science}
-\school{}
+\title{Der Titel}
+\subtitle{Hat natürlich auch einen Untertitel}
+\category{Bachelor Thesis}
+\author{Ivan Wolf}
+\email{$<$ivan.wolf@student.fhhwz.ch$>$}
+\professor{Prof. Dr. Walter Kuhn}
+\assistant{}
+\school{HWZ Hochschule für Wirtschaft}
+\department{Zürcher Fachhochschule}
 \version{}
 \date{\today}
 \copyrightyear{2005}
 
+\raggedbottom
 \makeindex
+\makeglossaries
+\include{glossary}
 
+%% The actual document
+%% ---------------------------------------------------------------------------------------------
 \begin{document}
 
 \frontmatter
-\maketitlepage
-\cleardoublepage
-\pdfbookmark{Contents}{toc}
 
-\chapter*{Abstract}
+	% Titelseite
+	\maketitlepage
+	
+	% Vorwort
+	\include{chapters/preface}
+	\cleardoublepage
 
-Here comes the abstract.
-
-\tableofcontents
+	% Management Summary
+	\include{chapters/abstract}
+	
+	% Inhaltsverzeichnis
+	\tableofcontents
 
 \mainmatter
 
-% here comes the content
-
-\part{First}
-\chapter{Foo}
-\section{Bar}
-\subsection{Quux}
-Lorem ipsum dolor
+	% The main content
+	\include{chapters/sample}
 
 \appendix
 
-\listoffigures
-\listoftables
+	% Anhang
+	\include{chapters/appendix}
 
-\chapter*{Acknowledgements}
+	% Bibliography
+	\bibliographystyle{authordate1}
+	\bibliography{hwz}
+	
+	% Abbildungs- und Tabellenverzeichnis
+	\listoffigures
+	\listoftables
+	
+	% Glossary
+	\printglossaries
+	
+	% Index
+	\cleardoublepage 
+	\printindex
+
 
 \newpage
 \thispagestyle{empty}
-
 \end{document} 
