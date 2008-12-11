@@ -7,7 +7,8 @@
 
 	\section{Bar}
 		\subsection{Quux}
-Lorem ipsum dolor\footnote{\cite{Bischoff-2008}}\\
+Lorem ipsum dolor\zitat{Bischoff-2008}\\
+Vgl. test\vgl[S.2]{Bischoff-2008}
 \gls{ria} ist ein Glossar Eintrag.\\
 Und noch ein \wi{Index}\\
 \Blindtext[2][2]
@@ -15,13 +16,4 @@ Und noch ein \wi{Index}\\
 	\section{Java}
 	
 Nun ein wenig Java Code!
-
-%\javafigure{
-%public class HelloWorld{
-%
-%	public static void main(String[] args){
-%		System.out.println("Hallo Welt!");
-%	}
-%
-%}
-%}{Java code example}{java1}
+\javalisting{code/example.java}{Java Hello World Beispiel}{java:example}

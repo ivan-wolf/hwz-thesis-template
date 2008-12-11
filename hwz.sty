@@ -159,18 +159,6 @@
    }
 }
 
-\newcommand{\javacode}[1]{
-	\begin{lstlisting}[language=Java]
-		#1
-	\end{lstlisting}
-}
-
-\newcommand{\javabox}[1]{%
-   \outline{%
-      \javacode{#1}
-   }
-}
-
 \newcommand{\shadecodebox}[1]{%
    \begin{footnotesize}
       \begin{shadebox}
@@ -415,18 +403,27 @@
     captionpos=b%
 }
 
-%\usepackage{float}
-
-%\newenvironment{code}[2]
-%{\begin{figure}[htb] \begin{lstlisting}[language=#1,label=listing:#2]}
-%{\end{lstlisting} \caption{#2} \end{figure}}
-
-\newcommand{\javafigure}[3]{%
-   \begin{figure}[htb]
-      \javabox{#1}
+% Eine Code Abbildung mit Caption und Label
+\newcommand{\javalisting}[3]{%
+	\begin{figure}[htb]
+      \lstinputlisting[language=Java]{#1}
       \caption{#2}
       \label{#3}
-   \end{figure}
+	\end{figure}
+}
+
+% erstellt eine Fussnote mit Vgl. und dahinter die zitierte Stelle
+% \vgl{Quelle05} -> vgl. Quelle 2005
+% \vgl[S. 123]{Quelle05} -> vgl. Quelle 2005, S. 123
+\newcommand{\vgl}[2][]{%
+  \footnote{Vgl. \cite{#2}\ifthenelse{\equal{#1}{}}{}{, #1}}
+}
+
+% erstellt eine Fussnote mit der zitierten Stelle
+% \zitat{Quelle05} -> Quelle 2005
+% \zitat[S. 123]{Quelle05} -> Quelle 2005, S. 123
+\newcommand{\zitat}[2][]{%
+  \footnote{\cite{#2}\ifthenelse{\equal{#1}{}}{}{, #1}}
 }
 
 \endinput
