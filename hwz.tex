@@ -1,50 +1,10 @@
 \documentclass[11pt,a4paper]{hwz-thesis}
 
-\usepackage{graphicx}
-\usepackage[helvetica]{quotchap}
-\usepackage{times}
-\RequirePackage[T1]{fontenc}
-\RequirePackage[latin1]{inputenc}
-\RequirePackage{lmodern}
 \usepackage[german,ngerman]{babel}
-\usepackage{longtable}
-\usepackage{fancyhdr}
-\usepackage{shadethm}
-\usepackage{url}
-\usepackage{makeidx}
 \usepackage[a4paper,portrait,twoside,inner=3.25cm,outer=3.5cm,top=3.5cm,bottom=4.0cm]{geometry}
-\usepackage{hyperref}
+% xcolor must be loaded here, else definecolor warnings show up
+\usepackage{xcolor}
 \usepackage{hwz}
-\usepackage[comma]{natbib}
-\usepackage{blindtext}
-\usepackage{glossaries}
-
-\renewcommand{\sectfont}{\sffamily\bfseries\Huge}
-
-\setlength{\shadedtextwidth}{\textwidth}
-\setlength{\shadeleftshift}{3mm}
-\setlength{\shaderightshift}{3mm}
-\addtolength{\shadedtextwidth}{-\shadeleftshift}
-\addtolength{\shadedtextwidth}{-\shaderightshift}
-\setlength{\parindent}{0pt}
-\setlength{\parskip}{0pt}
-
-\sloppy
-
-\pagestyle{fancy}
-\fancyhf{}
-\fancyhead[LE,RO]{\sffamily\bfseries\small\thepage}
-\fancyhead[LO]{\sffamily\bfseries\small\leftmark}
-\fancyhead[RE]{\sffamily\bfseries\small\rightmark}
-\renewcommand{\headrulewidth}{0.1pt}
-\renewcommand{\footrulewidth}{0pt}
-
-\fancypagestyle{plain}{
-   \fancyhf{}
-   \fancyfoot[C]{\sffamily\bfseries\small\thepage}
-   \renewcommand{\headrulewidth}{0pt}
-   \renewcommand{\footrulewidth}{0pt}
-}
 
 \hypersetup{
     pdftitle = HWZ Thesis Example,
@@ -74,56 +34,56 @@
 \date{\today}
 \copyrightyear{2005}
 
-\raggedbottom
 \makeindex
 \makeglossaries
 \include{glossary}
+
 
 %% The actual document
 %% ---------------------------------------------------------------------------------------------
 \begin{document}
 
-\frontmatter
+	\frontmatter
 
-	% Titelseite
-	\maketitlepage
+% Titelseite
+% @todo Oben auf der zweiten Seite des Titelblatts weitere Angaben (About the Author, Bild? :-), Adresse, Studiengruppe, ...)
+\maketitlepage
+
+% Management Summary
+\abstract{Management Summary}{chapters/abstract}
+
+% Inhaltsverzeichnis
+\toc
+
+% Vorwort
+\preface{Vorwort}{chapters/preface}
+
+	\mainmatter
+
+% The main content
+\include{chapters/sample}
+
+	\appendix
+
+% Anhang
+\include{chapters/appendix}
+
+% Bibliography
+\showbibliography{authordate1}{hwz}
+
+% Abbildungs- und Tabellenverzeichnis
+\listoffigures
+\listoftables
+
+% Glossary
+\showglossaries
+
+% Index
+\showindex
+
+% Insert an empty page at the end
+\theend
+
+% @todo Ehrenwörtliche Erklärung
 	
-	% Vorwort
-	\include{chapters/preface}
-	\cleardoublepage
-
-	% Management Summary
-	\include{chapters/abstract}
-	
-	% Inhaltsverzeichnis
-	\tableofcontents
-
-\mainmatter
-
-	% The main content
-	\include{chapters/sample}
-
-\appendix
-
-	% Anhang
-	\include{chapters/appendix}
-
-	% Bibliography
-	\bibliographystyle{authordate1}
-	\bibliography{hwz}
-	
-	% Abbildungs- und Tabellenverzeichnis
-	\listoffigures
-	\listoftables
-	
-	% Glossary
-	\printglossaries
-	
-	% Index
-	\cleardoublepage 
-	\printindex
-
-
-\newpage
-\thispagestyle{empty}
-\end{document} 
+\end{document}

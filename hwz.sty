@@ -1,8 +1,21 @@
 %% This file is `hwz.sty'
 \NeedsTeXFormat{LaTeX2e}
 
-\ProvidesPackage{hwz}[2008/12/10 0.1 HWZ Style]
+\ProvidesPackage{hwz}[2008/12/14 0.2 HWZ Style]
 
+\RequirePackage[helvetica]{quotchap}
+\RequirePackage{times}
+\RequirePackage[T1]{fontenc}
+\RequirePackage[latin1]{inputenc}
+\RequirePackage{lmodern}
+\RequirePackage[comma]{natbib}
+\RequirePackage{blindtext}
+\RequirePackage{longtable}
+\RequirePackage{fancyhdr}
+\RequirePackage{shadethm}
+\RequirePackage{url}
+\RequirePackage{makeidx}
+\RequirePackage{glossaries}
 \RequirePackage{graphicx}
 \RequirePackage{textcomp}
 \RequirePackage{relsize}
@@ -10,6 +23,14 @@
 \RequirePackage{shadethm}
 \RequirePackage{listings}
 \RequirePackage{xcolor} 
+\RequirePackage[hang,small,nooneline]{caption}
+\RequirePackage[hang,multiple]{footmisc}
+\RequirePackage{array}
+\RequirePackage[hyperfootnotes=false]{hyperref} % Disabling hyperref for footnotes because it causes problems with footmisc
+
+\typeout{Copyright Ivan Wolf}
+
+\renewcommand{\sectfont}{\sffamily\bfseries\Huge}
 
 \newif\ifpdf 
 \ifx\pdfoutput\undefined 
@@ -34,7 +55,7 @@
 \gdef\@subtitle{}
 \gdef\@logo{graphics/hwz}
 \gdef\@email{}
-\gdef\@professor{Dr. Antoine Trad}
+\gdef\@professor{Prof. Dr. Walter Kuhn}
 \gdef\@assistant{}
 \gdef\@school{HWZ Hochschule für Wirtschaft}
 \gdef\@department{Zürcher Fachhochschule}
@@ -270,13 +291,12 @@
 \newcommand{\bsl}{\char`\\}
 
 % HWZ Titlepage
-
 \newcommand{\maketitlepage}{
    \begin{titlepage}%
       \ifx\pdfoutput\undefined
          % We're not running pdftex
       \else
-         \pdfbookmark{Title}{title}
+         \pdfbookmark{Titel}{title}
       \fi
       \newlength{\centeroffset}
       \thispagestyle{empty}
@@ -317,22 +337,13 @@
          \end{minipage}
       }
       \vspace{4cm}
-      %\begin{figure}[b]%
-      %   \begin{minipage}[t]{6cm}%
-      %      \flushright
-      %      \includegraphics[height=1cm]{graphics/hwz}
-      %   \end{minipage}
-      %   \hfill
-      %\end{figure}      
       
 			\begin{figure}[b]%
 				\centering
 					\includegraphics[height=1cm]{graphics/hwz}
 			\end{figure}
-
       
       \addtolength{\textwidth}{\centeroffset} 
-      %\vspace{\stretch{1}}
       
       \pagebreak 
       \sffamily
@@ -344,6 +355,8 @@
       
    \end{titlepage}
 }
+
+\newcommand{\subtitlelinebreak}{\vspace{0.3em}\linebreak}
 
 % Some commands for helping with INDEX creation
 %
@@ -374,6 +387,19 @@
 
 % Intro Environment
 \newenvironment{intro}{\sffamily}{\vspace*{2ex minus 1.5ex}}
+
+% Quoting
+\newcommand{\quoteauthor}[1]{%
+	\small\sffamily \textmd{#1}
+}
+
+\newcommand{\bigquote}[2][]{%
+	\begin{quote}
+		\Large\textsl{#2}\par
+		\ifthenelse{\equal{#1}{}}{}
+		{\vspace{0.2em} \quoteauthor{#1}}
+	\end{quote}
+}
 
 % Code
 \definecolor{hellgelb}{rgb}{1,1,0.8}
@@ -409,22 +435,126 @@
       \lstinputlisting[language=Java]{#1}
       \caption{#2}
       \label{#3}
-	\end{figure}
+	\end{figure}\\
 }
 
 % erstellt eine Fussnote mit Vgl. und dahinter die zitierte Stelle
 % \vgl{Quelle05} -> vgl. Quelle 2005
 % \vgl[S. 123]{Quelle05} -> vgl. Quelle 2005, S. 123
 \newcommand{\vgl}[2][]{%
-  \footnote{Vgl. \cite{#2}\ifthenelse{\equal{#1}{}}{}{, #1}}
+  \footnote{Vgl. \cite{#2}\ifthenelse{\equal{#1}{}}{}{, #1}}%
 }
 
 % erstellt eine Fussnote mit der zitierten Stelle
 % \zitat{Quelle05} -> Quelle 2005
 % \zitat[S. 123]{Quelle05} -> Quelle 2005, S. 123
 \newcommand{\zitat}[2][]{%
-  \footnote{\cite{#2}\ifthenelse{\equal{#1}{}}{}{, #1}}
+  \footnote{\cite{#2}\ifthenelse{\equal{#1}{}}{}{, #1}}%
 }
+
+% Kommandozeilen Befehl
+\newcommand{\cl}[1]{%
+	\framebox{\texttt{#1}}%
+}
+
+% Caption settings
+\setlength{\captionmargin}{28pt}
+\setlength{\abovecaptionskip}{5pt}
+\renewcommand{\captionfont}{\sffamily\small}
+\renewcommand{\captionlabelfont}{\bfseries}
+
+% Footnote settings
+%\renewcommand\footnotelayout{\quad}
+\setlength{\footnotemargin}{1.5em}
+
+% Simple Table
+\newcommand{\tbl}[4]{
+	\begin{table}[h]
+			\begin{tabular}{#1}
+				#2
+			\end{tabular}
+		\caption{#3}
+		\label{#4}
+	\end{table}
+}
+
+% Pdfbookmarks
+\newcommand{\ifpdfbookmark}[1]{%
+	\ifx\pdfoutput\undefined \else \pdfbookmark{#1}{#1} \fi
+}
+\newcommand{\abstract}[2]{%
+	\cleardoublepage
+	\ifpdfbookmark{#1}
+\include{#2}
+}
+\newcommand{\toc}{%
+	\cleardoublepage
+	\ifpdfbookmark{\contentsname}
+	\tableofcontents
+}
+\newcommand{\preface}[2]{%
+	\cleardoublepage
+	\ifpdfbookmark{#1}
+\include{#2}
+}
+\newcommand{\showbibliography}[2]{%
+	\cleardoublepage
+	\ifpdfbookmark{\bibname}
+	\bibliographystyle{#1}
+	\bibliography{#2}
+}
+\newcommand{\showindex}{%
+	\cleardoublepage 
+	\ifpdfbookmark{\indexname}
+	\printindex
+}
+\newcommand{\showglossaries}{%
+	\cleardoublepage
+	\ifpdfbookmark{\glossaryname}
+	\printglossaries
+}
+
+\newcommand{\theend}{%
+	\cleardoublepage
+	\newpage
+	\thispagestyle{empty}
+	\vspace*{\fill}
+	\newpage
+	\thispagestyle{empty}
+	\vspace*{\fill}
+}
+
+\newcommand{\todo}[1]{%
+	 \textsf{\color{green} \textbf{@todo} #1}%
+}
+
+% Schaltet auf eine grosszügige Formatierungsweise um, die relativ wenige Worttrennungen am Zeilenende erzeugt, dafür aber auch etwas grössere Wortabstände innerhalb der Zeilen zulässt.
+\sloppy
+
+\setlength{\shadedtextwidth}{\textwidth}
+\setlength{\shadeleftshift}{3mm}
+\setlength{\shaderightshift}{3mm}
+\addtolength{\shadedtextwidth}{-\shadeleftshift}
+\addtolength{\shadedtextwidth}{-\shaderightshift}
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{0pt}
+
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[LE,RO]{\sffamily\bfseries\small\thepage}
+\fancyhead[LO]{\sffamily\bfseries\small\leftmark}
+\fancyhead[RE]{\sffamily\bfseries\small\rightmark}
+\renewcommand{\headrulewidth}{0.1pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\fancypagestyle{plain}{
+   \fancyhf{}
+   \fancyfoot[C]{\sffamily\bfseries\small\thepage}
+   \renewcommand{\headrulewidth}{0pt}
+   \renewcommand{\footrulewidth}{0pt}
+}
+
+\raggedbottom
 
 \endinput
 

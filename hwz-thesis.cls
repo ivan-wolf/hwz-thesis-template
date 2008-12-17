@@ -283,11 +283,13 @@
     \fi
     \markboth{}{}%
     {\centering
+     %\raggedright
      \interlinepenalty \@M
      \sffamily
      \ifnum \c@secnumdepth >-2\relax
        \huge\bfseries \partname~\thepart
        \par
+       \noindent\rule[-1ex]{\textwidth}{2pt}\par
        \vskip 20\p@
      \fi
      \Huge \bfseries #2\par}%
@@ -301,7 +303,8 @@
 \def\@endpart{\vfil\newpage
               \if@twoside
                 \null
-                \thispagestyle{chapheading}%
+                %\thispagestyle{chapheadings}
+                \thispagestyle{plain}
                 \newpage
               \fi
               \if@tempswa
